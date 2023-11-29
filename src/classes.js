@@ -22,4 +22,16 @@ class Red extends Color {
     }
 }
 
-module.exports = { Green, Blue, Red };
+class White extends Color {
+    constructor() {
+        super('white');
+    }
+}
+
+class Black extends Color {
+    constructor() {
+        super('black');
+    }
+}
+
+module.exports = { Green, Blue, Red, White, Black };
