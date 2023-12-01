@@ -6,7 +6,7 @@ This Node.js program is designed to parse and display colors in different format
 
 ## Installation
 
-To use this program, you need to have Node.js installed on your machine. No external dependencies are required as the program uses an external API (`apiMock.js`) for demonstration purposes.
+To use this program, you need to have Node.js installed on your machine. No external dependencies are required as the program uses a mocked API (`apiMock.js`) for demonstration purposes.
 
 1. Clone the repository to your local machine.
 2. Navigate to the directory containing the program.
