@@ -4,7 +4,7 @@ const { Green, Blue, Red, White, Black } = require('./classes');
 function parseArgs() {
     const args = process.argv.slice(2);
 
-    const colors = args.slice(0, 5);
+    const colors = args.filter((arg) => !arg.includes('--'));
     const flags = args.filter((arg) => arg.includes('--'));
 
     return { colors, flags };
