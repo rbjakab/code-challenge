@@ -17,7 +17,7 @@ The program is executed via the command line and takes several arguments to defi
 
 ### Command Line Arguments
 
--   **Color Names**: You can specify any number of color names as arguments. These should be valid color names recognized by the `getColor` function in `apiMock.js`.
+-   **Color Names**: You can specify any number of color names as arguments. These should be valid color names from the following list: [`red`, `green`, `blue`, `white`, `black`].
 -   **Flags**:
     -   `--RGB` or `--HEX`: Specify the output format for the color. Only one of these should be used at a time.
     -   `--par` or `--seq`: Determine the processing order of the colors. Use `--par` for parallel processing or `--seq` for sequential processing.
@@ -27,16 +27,16 @@ The program is executed via the command line and takes several arguments to defi
 Use the following command structure to run the program:
 
 ```bash
-node src/index.js [color1 color2 ...] --[RGB/HEX] --[par/seq]
+npm start [color1 color2 ...] --[RGB/HEX] --[par/seq]
 ```
 
 For example:
 
 ```bash
-node src/index.js red green blue --RGB --seq
+npm start green white red --RGB --seq
 ```
 
-This command will process the colors red, green, and blue sequentially and output their RGB values.
+This command will process the colors green, white, and red sequentially and output their RGB values.
 
 ## Error Handling
 
