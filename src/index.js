@@ -42,7 +42,7 @@ async function colors() {
     if (orderFlag === 'par') {
         const promises = colors.map((color) => getColor(color));
         const results = await Promise.all(promises);
-        console.log(results.map((result) => result[colorFlag]));
+        results.forEach((result) => console.log(result[colorFlag]));
     }
 
     if (orderFlag === 'seq') {
