@@ -1,11 +1,15 @@
 const { getColor } = require('./apiMock');
-const { Green, Blue, Red, White, Black } = require('./classes');
 
 function parseArgs() {
     const args = process.argv.slice(2);
 
     const colors = args.filter((arg) => !arg.includes('--'));
-    const flags = args.filter((arg) => arg.includes('--'));
+    const isRGB = process.env.npm_config_rgb !== undefined;
+    const isHEX = process.env.npm_config_hex !== undefined;
+    const isPAR = process.env.npm_config_parseable !== undefined;
+    const isSEQ = process.env.npm_config_seq !== undefined;
+
+    flags = [isRGB && '--RGB', isHEX && '--HEX', isPAR && '--par', isSEQ && '--seq'];
 
     return { colors, flags };
 }
