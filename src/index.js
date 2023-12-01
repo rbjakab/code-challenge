@@ -35,8 +35,6 @@ async function colors() {
     const { colors, flags } = parseArgs();
     const { colorFlag, orderFlag } = parseFlags(flags);
 
-    console.log(colors, colorFlag, orderFlag);
-
     if (orderFlag === 'par') {
         const promises = colors.map((color) => getColor(color));
         const results = await Promise.all(promises);
