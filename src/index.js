@@ -1,55 +1,54 @@
 const { getColor } = require('./apiMock');
-
 const { Green, Blue, Red, White, Black } = require('./classes');
 
-async function getColors(green, blue, red, white, black, order, callback) {
-    const colors = [];
+function parseArgs() {
+    const args = process.argv.slice(2);
 
-    if (green === 'true') {
-        green = new Green();
-        colors[order.indexOf(green.name)] = getColor(green.name);
-    }
-    if (blue === 'true') {
-        blue = new Blue();
-        colors[order.indexOf(blue.name)] = getColor(blue.name);
-    }
-    if (red === 'true') {
-        red = new Red();
-        colors[order.indexOf(red.name)] = getColor(red.name);
-    }
-    if (white === 'true') {
-        white = new White();
-        colors[order.indexOf(white.name)] = getColor(white.name);
-    }
-    if (black === 'true') {
-        black = new Black();
-        colors[order.indexOf(black.name)] = getColor(black.name);
-    }
-    callback(colors);
-    return colors;
+    const colors = args.slice(0, 5);
+    const flags = args.filter((arg) => arg.includes('--'));
+
+    return { colors, flags };
 }
 
-function colors() {
-    console.log('DEBUG: ', process.argv);
+function parseFlags(flags) {
+    const colorFlags = ['--HEX', '--RGB'];
+    const orderFlags = ['--par', '--seq'];
 
-    let green = process.argv[2];
-    let blue = process.argv[3];
-    let red = process.argv[4];
-    let white = process.argv[5];
-    let black = process.argv[6];
-    const colorOrder = process.argv[7];
+    const colorFlag = flags.filter((flag) => colorFlags.includes(flag));
+    const orderFlag = flags.filter((flag) => orderFlags.includes(flag));
 
-    getColors(green, blue, red, white, black, JSON.parse(colorOrder), async function (colors) {
-        colors = await Promise.all(colors);
-        var hexColors = [];
-        colors.forEach((color) => (color ? hexColors.push(color.HEX) : null));
-        console.log(hexColors);
-    });
+    if (colorFlag.length !== 1) {
+        throw Error('You must specify one color flag!');
+    }
+
+    if (orderFlag.length !== 1) {
+        throw Error('You must specify one order flag!');
+    }
+
+    return {
+        colorFlag: colorFlag[0].substring(2),
+        orderFlag: orderFlag[0].substring(2),
+    };
+}
+
+async function colors() {
+    const { colors, flags } = parseArgs();
+    const { colorFlag, orderFlag } = parseFlags(flags);
+
+    console.log(colors, colorFlag, orderFlag);
+
+    if (orderFlag === 'par') {
+        const promises = colors.map((color) => getColor(color));
+        const results = await Promise.all(promises);
+        console.log(results.map((result) => result[colorFlag]));
+    }
+
+    if (orderFlag === 'seq') {
+        for (const color of colors) {
+            const result = await getColor(color);
+            console.log(result[colorFlag]);
+        }
+    }
 }
 
 colors();
-
-/*
-To run application:
-node ~/code-challenge/src/index.js true false true '["green","blue", "red"]'
-*/
