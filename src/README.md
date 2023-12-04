@@ -20,7 +20,7 @@ The program is executed via the command line and takes several arguments to defi
 -   **Color Names**: You can specify any number of color names as arguments. These should be valid color names from the following list: [`red`, `green`, `blue`, `white`, `black`].
 -   **Flags**:
     -   `--RGB` or `--HEX`: Specify the output format for the color. Only one of these should be used at a time.
-    -   `--par` or `--seq`: Determine the processing order of the colors. Use `--par` for parallel processing or `--seq` for sequential processing.
+    -   `--par` or `--seq`: Determine the processing order of the colors. Use `--par` for parallel processing or `--seq` for sequential processing. Only one of these should be used at a time.
 
 ### Running the Program
 
@@ -46,12 +46,3 @@ The program will throw errors in the following cases:
 -   If neither or both of the order flags (`--par`, `--seq`) are specified.
 
 Ensure you specify exactly one color flag and one order flag.
-
-## Notes
-
--   The program is designed for demonstration purposes and relies on the `apiMock.js` file to simulate color data retrieval.
--   Modify `apiMock.js` as needed to suit your testing or development needs.
-
-## License
-
-This project is unlicensed and is intended for educational and demonstration purposes only.
